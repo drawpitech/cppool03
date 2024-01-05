@@ -38,3 +38,8 @@ create "dead knight" = Just createKnight
 create "witch" = Just createWitch
 create "sorceress" = Just createSorceress
 create _ = Nothing
+
+equip :: Item -> Mob -> Maybe Mob
+equip item (Sketeleton _) = Just $ Sketeleton item
+equip item (Witch _) = Just $ Witch (Just item)
+equip _ _ = Nothing
