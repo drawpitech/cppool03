@@ -12,3 +12,6 @@ instance Show Item where
     show Sword = "sword"
     show Bow = "bow"
     show MagicWand = "magic wand"
+
+data Mob = Mummy | Sketeleton Item | Witch (Maybe Item)
+    deriving (Eq, Show)
