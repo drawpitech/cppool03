@@ -5,6 +5,8 @@
 -- Game
 -}
 
+import Data.Maybe (isJust)
+
 data Item = Sword | Bow | MagicWand
     deriving (Eq)
 
@@ -24,6 +26,18 @@ instance Show Mob where
     show (Witch Nothing) = "witch"
     show (Witch (Just MagicWand)) = "sorceress"
     show (Witch (Just item)) = "witch holding a " ++ show item
+
+class HasItem a where
+    getItem :: a -> Maybe Item
+    getItem _ = Nothing
+
+    hasItem :: a -> Bool
+    hasItem = isJust . getItem
+
+instance HasItem Mob where
+    getItem (Skeleton item) = Just item
+    getItem (Witch item) = item
+    getItem _ = Nothing
 
 createMummy :: Mob
 createMummy = Mummy
