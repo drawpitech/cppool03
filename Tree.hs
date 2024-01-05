@@ -5,10 +5,8 @@
 -- Tree
 -}
 
-import Data.List (sort)
-
 data Tree a = Empty | Node (Tree a) a (Tree a)
-    deriving (Show)
+    deriving (Show, Functor, Foldable)
 
 addInTree :: Ord a => a -> Tree a -> Tree a
 addInTree value Empty = Node Empty value Empty
@@ -16,19 +14,11 @@ addInTree value (Node left root right)
     | value < root = Node (addInTree value left) root right
     | otherwise = Node left root (addInTree value right)
 
-instance Functor Tree where
-    fmap _ Empty = Empty
-    fmap f (Node left root right) = Node (fmap f left) (f root) (fmap f right)
-
 listToTree :: Ord a => [a] -> Tree a
 listToTree = foldr addInTree Empty
 
 treeToList :: Tree a -> [a]
 treeToList = foldr (:) []
 
-treeSort :: Ord a => Tree a -> [a]
-treeSort = sort . treeToList
-
-instance Foldable Tree where
-    foldr _ v Empty = v
-    foldr f v (Node left root right) = foldr f (foldr f (f root v) left) right
+treeSort :: Ord a => [a] -> [a]
+treeSort = treeToList . listToTree
