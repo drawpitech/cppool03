@@ -13,14 +13,14 @@ instance Show Item where
     show Bow = "bow"
     show MagicWand = "magic wand"
 
-data Mob = Mummy | Sketeleton Item | Witch (Maybe Item)
+data Mob = Mummy | Skeleton Item | Witch (Maybe Item)
     deriving (Eq)
 
 instance Show Mob where
     show Mummy = "mummy"
-    show (Sketeleton Bow) = "doomed archer"
-    show (Sketeleton Sword) = "dead knight"
-    show (Sketeleton item) = "sketeleton holding a " ++ show item
+    show (Skeleton Bow) = "doomed archer"
+    show (Skeleton Sword) = "dead knight"
+    show (Skeleton item) = "sketeleton holding a " ++ show item
     show (Witch Nothing) = "witch"
     show (Witch (Just MagicWand)) = "sorceress"
     show (Witch (Just item)) = "witch holding a " ++ show item
@@ -29,10 +29,10 @@ createMummy :: Mob
 createMummy = Mummy
 
 createArcher :: Mob
-createArcher = Sketeleton Bow
+createArcher = Skeleton Bow
 
 createKnight :: Mob
-createKnight = Sketeleton Sword
+createKnight = Skeleton Sword
 
 createWitch :: Mob
 createWitch = Witch Nothing
@@ -49,6 +49,6 @@ create "sorceress" = Just createSorceress
 create _ = Nothing
 
 equip :: Item -> Mob -> Maybe Mob
-equip item (Sketeleton _) = Just $ Sketeleton item
+equip item (Skeleton _) = Just $ Skeleton item
 equip item (Witch _) = Just $ Witch (Just item)
 equip _ _ = Nothing
