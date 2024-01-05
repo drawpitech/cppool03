@@ -14,7 +14,16 @@ instance Show Item where
     show MagicWand = "magic wand"
 
 data Mob = Mummy | Sketeleton Item | Witch (Maybe Item)
-    deriving (Eq, Show)
+    deriving (Eq)
+
+instance Show Mob where
+    show Mummy = "mummy"
+    show (Sketeleton Bow) = "doomed archer"
+    show (Sketeleton Sword) = "dead knight"
+    show (Sketeleton item) = "sketeleton holding a " ++ show item
+    show (Witch Nothing) = "witch"
+    show (Witch (Just MagicWand)) = "sorceress"
+    show (Witch (Just item)) = "witch holding a " ++ show item
 
 createMummy :: Mob
 createMummy = Mummy
