@@ -5,6 +5,8 @@
 -- Tree
 -}
 
+import Data.List (sort)
+
 data Tree a = Empty | Node (Tree a) a (Tree a)
     deriving (Show)
 
@@ -24,3 +26,6 @@ listToTree = foldr addInTree Empty
 treeToList :: Tree a -> [a]
 treeToList Empty = []
 treeToList (Node left root right) = root : treeToList left ++ treeToList right
+
+treeSort :: Ord a => Tree a -> [a]
+treeSort = sort . treeToList
