@@ -24,8 +24,7 @@ listToTree :: Ord a => [a] -> Tree a
 listToTree = foldr addInTree Empty
 
 treeToList :: Tree a -> [a]
-treeToList Empty = []
-treeToList (Node left root right) = root : treeToList left ++ treeToList right
+treeToList = foldr (:) []
 
 treeSort :: Ord a => Tree a -> [a]
 treeSort = sort . treeToList
