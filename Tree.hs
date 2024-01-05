@@ -8,7 +8,7 @@
 import Data.List (sort)
 
 data Tree a = Empty | Node (Tree a) a (Tree a)
-    deriving (Show, Foldable)
+    deriving (Show)
 
 addInTree :: Ord a => a -> Tree a -> Tree a
 addInTree value Empty = Node Empty value Empty
@@ -29,3 +29,7 @@ treeToList (Node left root right) = root : treeToList left ++ treeToList right
 
 treeSort :: Ord a => Tree a -> [a]
 treeSort = sort . treeToList
+
+instance Foldable Tree where
+    foldr _ v Empty = v
+    foldr f v (Node left root right) = foldr f (foldr f (f root v) left) right
