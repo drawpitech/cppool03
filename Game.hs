@@ -29,15 +29,13 @@ instance Show Mob where
 
 class HasItem a where
     getItem :: a -> Maybe Item
-    getItem _ = Nothing
-
     hasItem :: a -> Bool
     hasItem = isJust . getItem
 
 instance HasItem Mob where
     getItem (Skeleton item) = Just item
     getItem (Witch item) = item
-    getItem _ = Nothing
+    getItem Mummy = Nothing
 
 createMummy :: Mob
 createMummy = Mummy
