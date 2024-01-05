@@ -6,3 +6,4 @@
 -}
 
 data Item = Sword | Bow | MagicWand
+    deriving (Eq)
