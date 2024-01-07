@@ -22,7 +22,7 @@ instance Show Mob where
     show Mummy = "mummy"
     show (Skeleton Bow) = "doomed archer"
     show (Skeleton Sword) = "dead knight"
-    show (Skeleton item) = "sketeleton holding a " ++ show item
+    show (Skeleton item) = "skeleton holding a " ++ show item
     show (Witch Nothing) = "witch"
     show (Witch (Just MagicWand)) = "sorceress"
     show (Witch (Just item)) = "witch holding a " ++ show item
